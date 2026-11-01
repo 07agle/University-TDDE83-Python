@@ -1,0 +1,239 @@
+
+[course]
+name = "TDDE83"
+display_name = "TDDE83 – Programmering i Python, fortsättningskurs"
+# Sätts explicit i stället för att lita på parserns ifyllnad: det här är den
+# värd studentens OAuth-token skickas till, och ett fält med den innebörden
+# ska stå skrivet på ytan och inte härledas.
+gitlab_url = "https://gitlab.liu.se"
+# Mallens projekt-id (python-d-u/tdde83-student-base), som i TDDE82:s
+# handin.toml: verktyget varnar (med bekräftelse) när origin inte är en fork
+# av mallen. Id och inte sökväg, eftersom studenter döper om sina forkar.
+upstream_project_id = 59415
+language = "sv"
+
+[auth]
+oauth_client_id = "206eec78350dc7e65dda7b942b6502124c87dc1bc3c5d1dbd2e9398e7d784a02"
+token_cache_dir = "~/.config/handin"
+
+[defaults]
+target_project_id = 60014
+
+confidential = true
+check_existing = true
+labels = []
+
+# Policy, inte en kodswitch: verktyget skickar aldrig assignee_ids självt.
+partner_assignee = "bot"
+
+bot_active = false
+
+labels_set_later = true
+
+template_project = "python-d-u/tdde83-student-base"
+
+
+config_update_url = "https://python-d-u.gitlab-pages.liu.se/course-docs/guider/handin-tdde83.toml"
+
+# Tomt = deadlines läses ur [[deadline]] nedan.
+deadlines_url = ""
+
+min_script_version = "2.16.0"
+
+[defaults.code]
+check_uncommitted = true
+require_push = true
+
+check_analysis = false
+# Kurserna har inget valideringsskript. Sätts explicit till tomt i stället för
+# att ärva parserns default "bin/validate-handin": fältet pekar ut något som
+# KÖRS i studentens repo, och ett sådant fält ska aldrig ha ett värde som
+# kommit dit av sig självt.
+validation_script = ""
+
+[confirmation]
+enabled = true
+
+
+rules_url = "https://python-d-u.gitlab-pages.liu.se/course-docs/guider/ai-assistenten/#7-bekräftelse-vid-inlämning"
+
+# Tom lista = verktygets inbyggda svenska ordpool (20 ord), vald för att vara
+# ASCII-only. En egen lista här skulle behöva samma egenskap.
+words = []
+
+# En felskrivning får aldrig kosta en inlämning. Samma budget gäller följd-
+# frågan på nej-vägen.
+attempts = 3
+
+
+
+[[handin]]
+id = "lab-b1"
+required_paths = ["lab-b1/logic.py", "lab-b1/main.py", "lab-b1/registreringar.txt", "lab-b1/pyproject.toml", "lab-b1/uv.lock"]
+name = "Labb B1"
+type = "code"
+labels = ["type::lab-b1"]
+group_submission = true
+max_group_size = 2
+
+    [handin.lint]
+    checks = [
+        { name = "Typannoteringar (råd)", command = "{python} check_submission.py lab-b1 --types", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Ruff (råd)", command = "cd lab-b1 && uv run --frozen ruff check --config ../ruff.toml .", required = false, advisory = true },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b1 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Doctest", command = "cd lab-b1 && uv run --frozen python -m doctest logic.py", required = false },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[handin]]
+id = "lab-b2"
+required_paths = ["lab-b2/model.py", "lab-b2/io_utils.py", "lab-b2/cleaning.py", "lab-b2/report.py", "lab-b2/main.py", "lab-b2/studentdata.csv", "lab-b2/studentdata_clean.csv", "lab-b2/rensningsrapport.txt", "lab-b2/pyproject.toml", "lab-b2/uv.lock"]
+name = "Labb B2"
+type = "code"
+labels = ["type::lab-b2"]
+group_submission = true
+max_group_size = 2
+
+    [handin.lint]
+    checks = [
+        { name = "Typannoteringar (råd)", command = "{python} check_submission.py lab-b2 --types", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Ruff (råd)", command = "cd lab-b2 && uv run --frozen ruff check --config ../ruff.toml .", required = false, advisory = true },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b2 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Doctest", command = "cd lab-b2 && uv run --frozen python -m doctest model.py io_utils.py cleaning.py report.py", required = false },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[handin]]
+id = "lab-b3"
+required_paths = ["lab-b3/log_io.py", "lab-b3/matcher.py", "lab-b3/aggregator.py", "lab-b3/main.py", "lab-b3/test_matcher.py", "lab-b3/test_aggregator.py", "lab-b3/station.log", "lab-b3/pyproject.toml", "lab-b3/uv.lock"]
+name = "Labb B3"
+type = "code"
+labels = ["type::lab-b3"]
+group_submission = true
+max_group_size = 2
+
+    [handin.lint]
+    checks = [
+        { name = "Typannoteringar (råd)", command = "{python} check_submission.py lab-b3 --types", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Ruff (råd)", command = "cd lab-b3 && uv run --frozen ruff check --config ../ruff.toml .", required = false, advisory = true },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b3 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Doctest", command = "cd lab-b3 && uv run --frozen python -m doctest matcher.py aggregator.py main.py", required = false },
+        { name = "Pytest", command = "cd lab-b3 && uv run --frozen python -m pytest", required = false },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[handin]]
+id = "lab-b4"
+required_paths = ["lab-b4/tree_ops.py", "lab-b4/filesystem.py", "lab-b4/test_tree_ops.py", "lab-b4/test_filesystem.py", "lab-b4/pyproject.toml", "lab-b4/uv.lock"]
+name = "Labb B4"
+type = "code"
+labels = ["type::lab-b4"]
+group_submission = true
+max_group_size = 2
+
+# Docstringkontrollen i B4: bara att varje funktion har en docstring.
+# Hittar den något får ni frågan om ni vill lämna in ändå.
+
+    [handin.lint]
+    checks = [
+        { name = "Doctest", command = "cd lab-b4 && uv run --frozen python -m doctest tree_ops.py filesystem.py", required = false },
+        { name = "Typannoteringar", command = "{python} check_submission.py lab-b4 --types", required = false, unavailable_exit_codes = [2] },
+        { name = "Ruff", command = "cd lab-b4 && uv run --frozen ruff check --config ../ruff.toml .", required = false },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b4 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Pytest", command = "cd lab-b4 && uv run --frozen python -m pytest", required = false },
+        { name = "Docstringarna", command = "{python} check_docstrings.py --presence-only lab-b4", required = false, unavailable_exit_codes = [2] },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[handin]]
+id = "lab-b5"
+required_paths = ["lab-b5/models.py", "lab-b5/storage.py", "lab-b5/event_calendar.py", "lab-b5/test_models.py", "lab-b5/test_event_calendar.py", "lab-b5/pyproject.toml", "lab-b5/uv.lock"]
+name = "Labb B5"
+type = "code"
+labels = ["type::lab-b5"]
+group_submission = true
+max_group_size = 2
+
+
+    [handin.lint]
+    checks = [
+        { name = "Doctest", command = "cd lab-b5 && uv run --frozen python -m doctest models.py storage.py event_calendar.py", required = false },
+        { name = "Typannoteringar", command = "{python} check_submission.py lab-b5 --types", required = false, unavailable_exit_codes = [2] },
+        { name = "Ruff", command = "cd lab-b5 && uv run --frozen ruff check --config ../ruff.toml .", required = false },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b5 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Pytest", command = "cd lab-b5 && uv run --frozen python -m pytest", required = false },
+        { name = "Docstringarna", command = "{python} check_docstrings.py lab-b5", required = false, unavailable_exit_codes = [2] },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[handin]]
+id = "lab-b6"
+required_paths = ["lab-b6/main.py", "lab-b6/README.md", "lab-b6/pyproject.toml", "lab-b6/uv.lock"]
+name = "Labb B6"
+type = "code"
+labels = ["type::lab-b6"]
+group_submission = true
+max_group_size = 2
+
+# Docstringkontrollen i B6: docstrings med Args: och Returns:, som i B5.
+# Hittar den något får ni frågan om ni vill lämna in ändå.
+
+    [handin.lint]
+    checks = [
+        { name = "Typannoteringar", command = "{python} check_submission.py lab-b6 --types", required = false, unavailable_exit_codes = [2] },
+        { name = "Ruff", command = "cd lab-b6 && uv run --frozen ruff check --config ../ruff.toml .", required = false },
+        { name = "Ofärdiga kroppar (råd)", command = "{python} check_submission.py lab-b6 --stubs", required = false, unavailable_exit_codes = [2], advisory = true },
+        { name = "Dokumentation", command = "{python} check_submission.py lab-b6 --documentation", required = false, unavailable_exit_codes = [2] },
+        { name = "Pytest", command = "cd lab-b6 && uv run --frozen python -m pytest", required = false },
+        { name = "Docstringarna", command = "{python} check_docstrings.py lab-b6", required = false, unavailable_exit_codes = [2] },
+    ]
+
+    [handin.checklist]
+    items = [
+        { question = "Har ni fått er redovisning godkänd av en handledare?", stop_on_no = true },
+    ]
+
+[[deadline]]
+date = "2026-11-22"
+handins = ["lab-b1"]
+message = "Se schemasidan för vad datumet betyder – det är ett generöst säkerhetsdatum, inte ett stopp: https://python-d-u.gitlab-pages.liu.se/course-docs/schema/"
+
+[[deadline]]
+date = "2026-11-29"
+handins = ["lab-b2"]
+message = "Se schemasidan för vad datumet betyder – det är ett generöst säkerhetsdatum, inte ett stopp: https://python-d-u.gitlab-pages.liu.se/course-docs/schema/"
+
+[[deadline]]
+date = "2026-12-06"
+handins = ["lab-b3"]
+message = "Se schemasidan för vad datumet betyder – det är ett generöst säkerhetsdatum, inte ett stopp: https://python-d-u.gitlab-pages.liu.se/course-docs/schema/"
+
+[[deadline]]
+date = "2026-12-13"
+handins = ["lab-b4", "lab-b5"]
+message = "Se schemasidan för vad datumet betyder – det är ett generöst säkerhetsdatum, inte ett stopp: https://python-d-u.gitlab-pages.liu.se/course-docs/schema/"
+
+[[deadline]]
+date = "2026-12-18"
+handins = ["lab-b6"]
+message = "Se schemasidan för vad datumet betyder – det är ett generöst säkerhetsdatum, inte ett stopp: https://python-d-u.gitlab-pages.liu.se/course-docs/schema/"

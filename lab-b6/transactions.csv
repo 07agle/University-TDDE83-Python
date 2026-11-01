@@ -1,0 +1,4 @@
+transaction_id,date,amount,category,description,payment_method
+tx001,2024-03-01,350.00,mat,ICA Maxi,kort
+tx002,2024-03-02,50.00,transport,Bussbiljett,kort
+tx003,2024-03-05,1200.00,nöje,Konsertbiljetter,kort

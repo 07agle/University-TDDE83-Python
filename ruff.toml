@@ -1,0 +1,18 @@
+# Kursens regler för Ruff i TDDE83. Ruff hittar filen själv när ni kör
+# `uv run ruff check .` i en labbmapp. Reglerna fångar sådant som nästan
+# alltid är fel, inte stil. Ändra inte filen: handledarens kontroll använder
+# samma regler, oavsett vad som står här.
+target-version = "py314"
+
+[lint]
+select = [
+    "F",     # Pyflakes: odefinierade namn, felaktiga importer m.m.
+    "E9",    # en fil som Ruff inte kan läsa (syntaxfel visar Ruff alltid)
+    "E722",  # except: utan feltyp
+    "B006",  # lista, dictionary eller mängd som standardvärde för en parameter
+    "PLE",   # fel som verktyget Pylint brukar hitta
+    "W605",  # ogiltig escape-sekvens i en sträng, till exempel "\d"
+]
+# Oanvända importer och variabler, och en f-sträng utan platshållare (F541),
+# fäller inget; handledarens kontroll nämner dem som råd.
+ignore = ["F401", "F541", "F841"]

@@ -1,0 +1,22 @@
+[
+  {"student_id": "s12345", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12346", "kurs": "TDDE83", "termin": "HT2024"},
+  {"student_id": "s12345", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12347", "kurs": "", "termin": "HT2024"},
+  {"student_id": "", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12348", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12349", "kurs": "TDDE83", "termin": "HT2024"},
+  {"student_id": "s12350", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12351", "kurs": "TDDE83", "termin": "HT2024"},
+  {"student_id": "s12352", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12353", "kurs": "TDDE83", "termin": "HT2024"},
+  {"student_id": "s12354", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12355", "kurs": "TDDE83", "termin": "HT2024"},
+  {"student_id": "s12356", "kurs": "TDDE82", "termin": "HT2024"},
+  {"student_id": "s12357", "kurs": "", "termin": "VT2025"},
+  {"student_id": "s12358", "kurs": "TDDE83", "termin": "VT2025"},
+  {"student_id": "s12359", "kurs": "TDDE82", "termin": "VT2025"},
+  {"student_id": "s12360", "kurs": "TDDE83", "termin": "VT2025"},
+  {"student_id": "s12361", "kurs": "TDDE82", "termin": "VT2025"},
+  {"student_id": "s12358", "kurs": "TDDE83", "termin": "VT2025"}
+]

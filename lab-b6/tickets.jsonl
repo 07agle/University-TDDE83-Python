@@ -1,0 +1,2 @@
+{"ticket_id": "T001", "title": "Skrivaren funkar inte", "description": "...", "status": "open", "priority": "medium", "created": "2024-03-15T10:00:00", "updated": "2024-03-15T10:00:00"}
+{"ticket_id": "T002", "title": "Glömt lösenord", "description": "...", "status": "closed", "priority": "low", "created": "2024-03-14T09:00:00", "updated": "2024-03-14T09:30:00"}

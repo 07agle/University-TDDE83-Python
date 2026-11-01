@@ -1,0 +1,18 @@
+{
+  "rooms": [
+    {
+      "room_id": "start",
+      "name": "Entréhallen",
+      "description": "En stor hall med stenmurar. En fackla fladdrar på väggen.",
+      "exits": {"norr": "bibliotek", "öst": "korridor"},
+      "items": ["fackla"]
+    },
+    {
+      "room_id": "bibliotek",
+      "name": "Det gamla biblioteket",
+      "description": "Dammiga hyllor fyllda med böcker. En mystisk karta ligger på bordet.",
+      "exits": {"söder": "start", "öst": "skattkammaren"},
+      "items": ["karta"]
+    }
+  ]
+}

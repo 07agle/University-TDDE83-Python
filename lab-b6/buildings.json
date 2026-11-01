@@ -1,0 +1,11 @@
+[
+  {
+    "building_id": "b1",
+    "name": "B-huset",
+    "position": [10.5, 20.3],
+    "rooms": [
+      {"room_id": "b1-001", "name": "Sal 001", "building_id": "b1", "floor": 0, "capacity": 100},
+      {"room_id": "b1-101", "name": "Sal 101", "building_id": "b1", "floor": 1, "capacity": 50}
+    ]
+  }
+]

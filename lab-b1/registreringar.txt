@@ -1,0 +1,5 @@
+Anna;Andersson;980101-1234;TDDE82;Programmering i Python, grundkurs
+Erik;Eriksson;990202-5678;TDDE83;Programmering i Python, fortsättningskurs
+Priya;Sharma;970303-9012;TDDE82;Programmering i Python, grundkurs
+Omar;Hassan;980404-3456;TDDE83;Programmering i Python, fortsättningskurs
+Maria;Magnusson;990505-7891;TDDE82;Programmering i Python, grundkurs

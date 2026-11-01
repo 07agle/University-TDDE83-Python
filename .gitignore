@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtuell miljö: skapas av uv och ska aldrig committas
+.venv/
+
+# Verktygens cachekataloger
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.hypothesis/
+.coverage
+htmlcov/
+coverage.xml
+
+# Lokala inställningar som kan innehålla lösenord eller åtkomstnycklar
+.env
+.env.*
+!.env.example
+/.handin-token
+
+# Editor
+**/.vscode/*
+!**/.vscode/settings.json
+.idea/
+*~
+*.swp
+
+# Operativsystem
+.DS_Store
+Thumbs.db
+
+# Committa både pyproject.toml och uv.lock, så att din partner kan köra
+# uv sync efter git pull. Labbresultat och egna datafiler ska också följa med.

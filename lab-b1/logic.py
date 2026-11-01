@@ -1,0 +1,97 @@
+"""Funktioner för att läsa och bearbeta kursregistreringar."""
+
+
+def read_lines(filename: str) -> list[str]:
+    """Läser alla rader från en fil och returnerar dem som en lista.
+
+    Varje rad rensas från omgivande blanktecken (whitespace).
+
+    Args:
+        filename: Sökväg till filen som ska läsas
+
+    Returns:
+        Lista med rader från filen (rensade från whitespace)
+
+    >>> from pathlib import Path
+    >>> test_file = Path("read_lines_doctest.txt")
+    >>> test_file.exists()  # doctest: +FAIL_FAST
+    False
+    >>> _ = test_file.write_text("  Anna\\nErik  \\n", encoding="utf-8")
+    >>> read_lines(str(test_file))
+    ['Anna', 'Erik']
+    >>> _ = test_file.unlink()
+    """
+    ...
+
+
+def parse_record(line):
+    """Tolkar en rad med semikolonseparerade fält till en dictionary.
+
+    Förväntat format: fornamn;efternamn;personnummer;kurskod;kursnamn
+
+    Args:
+        line: En rad med semikolonseparerade värden
+
+    Returns:
+        Dictionary med nycklarna 'fornamn', 'efternamn', 'personnummer',
+        'kurskod' och 'kursnamn'
+
+    >>> record = parse_record("Anna;Andersson;980101-1234;TDDE82;Python grundkurs")
+    >>> record == {
+    ...     'fornamn': 'Anna', 'efternamn': 'Andersson', 'personnummer': '980101-1234',
+    ...     'kurskod': 'TDDE82', 'kursnamn': 'Python grundkurs',
+    ... }
+    True
+    """
+    ...
+
+
+def filter_records(records, field, value):
+    """Filtrerar poster baserat på ett fält och önskat värde.
+
+    Args:
+        records: Lista med poster, där varje post är en dictionary med
+            strängar som både nycklar och värden
+        field: Namn på fältet att filtrera på
+        value: Värdet som fältet ska ha
+
+    Returns:
+        Lista med poster där fältet har det angivna värdet
+
+    >>> data = [{'namn': 'Anna', 'kurs': 'TDDE82'}, {'namn': 'Erik', 'kurs': 'TDDE83'}]
+    >>> filter_records(data, 'kurs', 'TDDE82')
+    [{'namn': 'Anna', 'kurs': 'TDDE82'}]
+    >>> filter_records(data, 'kurs', 'TDDE84')
+    []
+    >>> filter_records(data, 'namn', 'Erik')
+    [{'namn': 'Erik', 'kurs': 'TDDE83'}]
+    >>> data
+    [{'namn': 'Anna', 'kurs': 'TDDE82'}, {'namn': 'Erik', 'kurs': 'TDDE83'}]
+    """
+    ...
+
+
+def summarize(records):
+    """Skapar en formaterad sammanfattning av registreringar per kurs.
+
+    Args:
+        records: Lista med registreringsposter
+
+    Returns:
+        Formaterad sträng med antal registreringar per kurskod
+
+    >>> data = [
+    ...     {'fornamn': 'Anna', 'kurskod': 'TDDE82'},
+    ...     {'fornamn': 'Erik', 'kurskod': 'TDDE83'},
+    ...     {'fornamn': 'Priya', 'kurskod': 'TDDE82'},
+    ...     {'fornamn': 'Omar', 'kurskod': 'TDDE83'},
+    ...     {'fornamn': 'Maria', 'kurskod': 'TDDE82'}
+    ... ]
+    >>> print(summarize(data))
+    Kursregistreringar:
+    TDDE82: 3 studenter
+    TDDE83: 2 studenter
+    >>> print(summarize([]))
+    Kursregistreringar:
+    """
+    ...

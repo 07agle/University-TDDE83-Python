@@ -1,0 +1,21 @@
+student_id,namn,epost,registreringsdatum,program
+s12345,Anna Andersson,anna.andersson@student.liu.se,2024-01-15,D
+s12346,Erik Eriksson,erik.eriksson@student.liu.se,15/01/2024,I
+s12345,Anna Andersson,anna.andersson@student.liu.se,2024-01-15,D
+s12347,Priya Sharma,,2024-01-16,
+s12348,Omar Hassan,omar.h@student.liu.se,2024/01/16,D
+s12349,Maria Magnusson,maria.m@student.liu.se,invalid-date,I
+s12350,Wei Chen,wei.c@student.liu.se,2024-01-17,D
+s12346,Erik Eriksson,erik.eriksson@student.liu.se,15/01/2024,I
+s12351,Fatima Al-Rashid,fatima.a@student.liu.se,2024/01/18,D
+s12352,Johan Johansson,johan.j@student.liu.se,2024/01/18,I
+s12353,Sara Svensson,,2024-01-19,D
+s12354,Raj Patel,raj.p@student.liu.se,19/01/2024,
+s12355,Emma Ekström,emma.e@student.liu.se,2024-01-20,I
+s12351,Fatima Al-Rashid,fatima.a@student.liu.se,2024/01/18,D
+s12356,David Dahl,david.d@student.liu.se,2024/13/01,D
+s12357,Linnea Lind,linnea.l@student.liu.se,2024/01/21,I
+s12358,Olivia Olsson,olivia.o@student.liu.se,2024-01-22,D
+s12359,Ahmed Abbas,ahmed.a@student.liu.se,22/01/2024,I
+s12360,Klara Karlsson,klara.k@student.liu.se,2024-01-23,D
+s12361,Noah Nilsson,noah.n@student.liu.se,2024-01-23,
