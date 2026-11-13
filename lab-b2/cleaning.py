@@ -20,6 +20,7 @@ from model import (
 
 from copy import deepcopy
 
+
 def remove_duplicates(records: StudentList) -> StudentList:
     """Tar bort dubbletter baserat på student_id.
 
@@ -45,11 +46,12 @@ def remove_duplicates(records: StudentList) -> StudentList:
     student_posts = []
     for record in records:
         for key, value in record.items():
-            if key == "student_id": 
+            if key == "student_id":
                 if value not in student_posts:
                     student_posts.append(value)
                     unique_list.append(record)
     return unique_list
+
 
 def fill_missing_fields(records: StudentList) -> StudentList:
     """Fyller i saknade eller tomma fält med default-värden.
@@ -76,12 +78,13 @@ def fill_missing_fields(records: StudentList) -> StudentList:
     for record in new_student_list:
         for key, value in record.items():
             if not value:
-                if key=="epost":
+                if key == "epost":
                     record["epost"] = DEFAULT_EMAIL
-                if key=="program":
+                if key == "program":
                     record["program"] = DEFAULT_PROGRAM
 
     return new_student_list
+
 
 def _parse_date(date_str: str) -> str:
     """Hjälpfunktion för att tolka datum i olika format.
@@ -92,22 +95,16 @@ def _parse_date(date_str: str) -> str:
     Returns:
         Datum i ISO 8601-format eller DEFAULT_DATE vid fel
     """
-    try:
-        datetime.strptime(date_str, "%Y-%m-%d")
-        return date_str
-    except ValueError:
-        pass
-    try:
-        reg_date = datetime.strptime(date_str, "%Y/%m/%d")
-        return reg_date.strftime("%Y-%m-%d")
-    except ValueError:
-        pass
-    try:
-        reg_date = datetime.strptime(date_str, "%d/%m/%Y")
-        return reg_date.strftime("%Y-%m-%d")
-        
-    except ValueError:
-        return DEFAULT_DATE
+
+    format_list = ["%Y-%m-%d", "%Y/%m/%d", "%d/%m/%Y"]
+
+    for format in format_list:
+        try:
+            reg_date = datetime.strptime(date_str, format)
+            return reg_date.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return DEFAULT_DATE
 
 def normalize_dates(records: StudentList) -> StudentList:
     """Normaliserar datum till ISO 8601-format (YYYY-MM-DD).
@@ -137,10 +134,9 @@ def normalize_dates(records: StudentList) -> StudentList:
     '15/01/2024'
     """
     new_student_list = deepcopy(records)
-    reg_date = datetime.date
 
     for record in new_student_list:
-            for key, value in record.items():
-                if key=="registreringsdatum":
-                    record[key] = _parse_date(value)     
+        for key, value in record.items():
+            if key == "registreringsdatum":
+                record[key] = _parse_date(value)
     return new_student_list

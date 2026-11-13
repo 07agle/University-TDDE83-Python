@@ -1,0 +1,5 @@
+Antal originella poster: 20
+Antal rensade poster: 17
+Antal dubbletter bortagna: 3
+Antal poster där fält fylldes i: 4
+Antal poster där datum normaliserades: 9

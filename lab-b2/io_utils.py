@@ -31,7 +31,7 @@ def read_csv(filename: str) -> StudentList:
     True
     >>> _ = csv_file.unlink()
     """
-    student_list =[]
+    student_list = []
 
     with open(filename, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -59,12 +59,11 @@ def write_csv(filename: str, records: StudentList, fieldnames: list[str]) -> Non
     True
     >>> _ = csv_file.unlink()
     """
-    with open(filename, "w", encoding="utf-8", newline = "") as f:
+    with open(filename, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames)
 
         writer.writeheader()
         writer.writerows(records)
-
 
 
 def write_report(filename: str, content: str) -> None:

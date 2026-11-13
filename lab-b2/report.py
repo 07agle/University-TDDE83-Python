@@ -41,6 +41,7 @@ def generate_report(
     [True, True, True, True, True]
     >>> len(report.splitlines()) > 1
     True
+
     >>> print(generate_report(1, 1, 1, 1, 1))
     Antal originella poster: 1
     Antal rensade poster: 1
@@ -54,8 +55,8 @@ def generate_report(
         f"Antal dubbletter bortagna: {duplicates_removed}\n"
         f"Antal poster där fält fylldes i: {fields_fixed}\n"
         f"Antal poster där datum normaliserades: {dates_fixed}"
-
     )
+
 
 def count_issues(original: StudentList, cleaned: StudentList) -> dict[str, int]:
     """Räknar antal problem som åtgärdades.
