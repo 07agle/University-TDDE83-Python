@@ -43,8 +43,28 @@ def match_pattern(log_entry: LogEntry, pattern: Pattern) -> bool:
         >>> match_pattern(entry, {"level": "INFO,DEBUG"})
         False
     """
-    ...
 
+    for key, value in pattern.items():
+        element_found = False
+        if key not in log_entry:
+            return False
+        
+        value_list = value.split(",")
+        
+        for element in value_list:
+            if element == log_entry[key] or element == "&" and log_entry[key] != None:
+                element_found = True
+
+        if not element_found:
+
+            if value != log_entry[key]:
+                if value != "&":
+                    return False
+        
+        if not element_found:
+            return False
+
+    return True
 
 def filter_logs(logs: LogList, pattern: Pattern) -> LogList:
     """Filtrerar loggar baserat på ett mönster.
@@ -65,4 +85,9 @@ def filter_logs(logs: LogList, pattern: Pattern) -> LogList:
         >>> filter_logs(logs, {"level": "ERROR"})
         [{'level': 'ERROR', 'msg': 'Failed'}, {'level': 'ERROR', 'msg': 'Timeout'}]
     """
-    ...
+    filtered_list = []
+
+    for log_entry in logs:
+        if match_pattern(log_entry, pattern):
+            filtered_list.append(log_entry)
+    return filtered_list

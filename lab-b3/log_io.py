@@ -7,6 +7,9 @@ nya rader sist i filen utan att behöva läsa om hela filen.
 
 import json
 
+type LogEntry = dict[str, str | None]
+type LogList = list[LogEntry]
+
 
 def load_logs(filename: str) -> LogList:
     """Läser en JSON Lines-fil och returnerar lista med loggposter.
@@ -24,4 +27,12 @@ def load_logs(filename: str) -> LogList:
     Raises:
         FileNotFoundError: Om filen inte finns
     """
-    ...
+    log_list = []
+    with open(filename, "r", encoding="utf-8") as f:
+        for row in f:
+            try:
+                if row.strip():
+                    log_list.append(json.loads(row))
+            except json.decoder.JSONDecodeError:
+                print("Felaktig JSON-rad")
+    return log_list

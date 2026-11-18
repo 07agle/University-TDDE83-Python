@@ -10,6 +10,36 @@ from log_io import LogEntry, LogList
 
 type CountDict = dict[str, int]
 
+def level_key(entry: LogEntry) -> str | None:
+    """Returnerar loggpostens nivå (level) som nyckel för count_by.
+
+    Saknar posten fältet level returneras None, så att count_by hoppar
+    över posten. Har fältet värdet None returneras strängen
+    '(inget värde)', så att posten räknas under den nyckeln.
+
+    Args:
+        entry: Loggposten
+
+    Returns:
+        Postens nivå, '(inget värde)' eller None
+
+    Examples:
+        >>> level_key({"level": "ERROR", "user": "anna"})
+        'ERROR'
+        >>> level_key({"level": None})
+        '(inget värde)'
+        >>> level_key({"user": "anna"}) is None
+        True
+    """
+    for key, value in entry.items():
+        if entry.get("level"):
+            return entry["level"]
+        elif not entry.get("level") and key == "level":
+            return "(inget värde)"
+        else:
+            return None
+
+
 
 def count_by(logs: LogList, key: Callable[[LogEntry], str | None]) -> CountDict:
     """Räknar hur många loggposter som ger varje nyckel.
@@ -36,32 +66,15 @@ def count_by(logs: LogList, key: Callable[[LogEntry], str | None]) -> CountDict:
         >>> count_by(logs, level_key) == {'ERROR': 2, 'INFO': 1, '(inget värde)': 1}
         True
     """
-    ...
+    count_dict = {}
+    for log in logs:
+        key_value = key(log)
+        if key_value in count_dict:
+            count_dict[key_value] += 1
+        elif key_value is not None:
+            count_dict[key_value] = 1
 
-
-def level_key(entry: LogEntry) -> str | None:
-    """Returnerar loggpostens nivå (level) som nyckel för count_by.
-
-    Saknar posten fältet level returneras None, så att count_by hoppar
-    över posten. Har fältet värdet None returneras strängen
-    '(inget värde)', så att posten räknas under den nyckeln.
-
-    Args:
-        entry: Loggposten
-
-    Returns:
-        Postens nivå, '(inget värde)' eller None
-
-    Examples:
-        >>> level_key({"level": "ERROR", "user": "anna"})
-        'ERROR'
-        >>> level_key({"level": None})
-        '(inget värde)'
-        >>> level_key({"user": "anna"}) is None
-        True
-    """
-    ...
-
+    return count_dict
 
 def module_key(entry: LogEntry) -> str | None:
     """Returnerar loggpostens modul (module) som nyckel för count_by.
@@ -73,8 +86,21 @@ def module_key(entry: LogEntry) -> str | None:
 
     Returns:
         Postens modul, '(inget värde)' eller None
+    >>> module_key({"modul": "ERROR", "user": "anna"})
+    'ERROR'
+    >>> module_key({"modul": None})
+    '(inget värde)'
+    >>> module_key({"user": "anna"}) is None
+    True
     """
-    ...
+
+    for key, value in entry.items():
+            if entry.get("modul"):
+                return entry["modul"]
+            elif not entry.get("modul") and key == "modul":
+                return "(inget värde)"
+            else:
+                return None
 
 
 def format_counts(counts: CountDict, title: str) -> str:
