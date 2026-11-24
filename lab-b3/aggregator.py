@@ -10,6 +10,7 @@ from log_io import LogEntry, LogList
 
 type CountDict = dict[str, int]
 
+
 def level_key(entry: LogEntry) -> str | None:
     """Returnerar loggpostens nivå (level) som nyckel för count_by.
 
@@ -31,14 +32,7 @@ def level_key(entry: LogEntry) -> str | None:
         >>> level_key({"user": "anna"}) is None
         True
     """
-    for key, value in entry.items():
-        if entry.get("level"):
-            return entry["level"]
-        elif not entry.get("level") and key == "level":
-            return "(inget värde)"
-        else:
-            return None
-
+    return _find_key("level", entry)
 
 
 def count_by(logs: LogList, key: Callable[[LogEntry], str | None]) -> CountDict:
@@ -76,6 +70,7 @@ def count_by(logs: LogList, key: Callable[[LogEntry], str | None]) -> CountDict:
 
     return count_dict
 
+
 def module_key(entry: LogEntry) -> str | None:
     """Returnerar loggpostens modul (module) som nyckel för count_by.
 
@@ -93,11 +88,14 @@ def module_key(entry: LogEntry) -> str | None:
     >>> module_key({"user": "anna"}) is None
     True
     """
+    return _find_key("module", entry)
+    
 
-    for key, value in entry.items():
-            if entry.get("module"):
-                return entry["module"]
-            elif not entry.get("module") and key == "module":
+def _find_key(key_var : str, entry: LogEntry) -> str | None:
+    for key in entry.keys():
+            if entry.get(key_var):
+                return entry[key_var]
+            elif not entry.get(key_var) and key == key_var:
                 return "(inget värde)"
             else:
                 return None
