@@ -86,18 +86,18 @@ def module_key(entry: LogEntry) -> str | None:
 
     Returns:
         Postens modul, '(inget värde)' eller None
-    >>> module_key({"modul": "ERROR", "user": "anna"})
+    >>> module_key({"module": "ERROR", "user": "anna"})
     'ERROR'
-    >>> module_key({"modul": None})
+    >>> module_key({"module": None})
     '(inget värde)'
     >>> module_key({"user": "anna"}) is None
     True
     """
 
     for key, value in entry.items():
-            if entry.get("modul"):
-                return entry["modul"]
-            elif not entry.get("modul") and key == "modul":
+            if entry.get("module"):
+                return entry["module"]
+            elif not entry.get("module") and key == "module":
                 return "(inget värde)"
             else:
                 return None

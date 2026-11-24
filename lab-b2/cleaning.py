@@ -45,12 +45,14 @@ def remove_duplicates(records: StudentList) -> StudentList:
     unique_list = []
     student_posts = []
     for record in records:
-        for key, value in record.items():
-            if key == "student_id":
-                if value not in student_posts:
-                    student_posts.append(value)
-                    unique_list.append(record)
+        if record.get("student_id"):
+            if record.get("student_id") not in student_posts:
+                student_posts.append(record.get("student_id"))
+                unique_list.append(record)
     return unique_list
+
+def _deepcopy_list(studen_list : StudentList) -> StudentList:
+    return deepcopy(studen_list)
 
 
 def fill_missing_fields(records: StudentList) -> StudentList:
@@ -73,18 +75,15 @@ def fill_missing_fields(records: StudentList) -> StudentList:
     >>> data[0]["epost"]
     ''
     """
-    new_student_list = deepcopy(records)
+    new_student_list = _deepcopy_list(records)
 
     for record in new_student_list:
-        for key, value in record.items():
-            if not value:
-                if key == "epost":
-                    record["epost"] = DEFAULT_EMAIL
-                if key == "program":
-                    record["program"] = DEFAULT_PROGRAM
+        if not record.get("epost"):
+            record["epost"] = DEFAULT_EMAIL
+        if not record.get("program"):
+            record["program"] = DEFAULT_PROGRAM
 
     return new_student_list
-
 
 def _parse_date(date_str: str) -> str:
     """Hjälpfunktion för att tolka datum i olika format.
@@ -136,7 +135,8 @@ def normalize_dates(records: StudentList) -> StudentList:
     new_student_list = deepcopy(records)
 
     for record in new_student_list:
-        for key, value in record.items():
-            if key == "registreringsdatum":
-                record[key] = _parse_date(value)
+        if record.get("registreringsdatum"):
+            record["registreringsdatum"] = _parse_date(record.get("registreringsdatum"))
     return new_student_list
+
+

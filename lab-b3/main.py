@@ -48,7 +48,11 @@ def parse_args(args: list[str]) -> dict[str, str]:
 
 def main() -> None:
     """Huvudprogram."""
-    ...
+
+    load_dict = load_logs("station.log")
+    pattern = parse_args(sys.argv[1:])
+    load_dict = filter_logs(load_dict, pattern)
+    print(summarize(load_dict))
 
 
 if __name__ == "__main__":
