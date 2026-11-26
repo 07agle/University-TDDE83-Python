@@ -61,30 +61,28 @@ def folder_contents(fs: TreeNode, folder: str) -> list[str | int] | None:
         True
     """
 
-    filename_list =  []
-    if fs.value == folder and fs.children:
+    filename_list =  None
+    if fs.value == folder:
+        filename_list =[]
         for child in fs.children:
             filename_list.append(child.value)
         return filename_list 
     
     for child in fs.children:
-        if folder_contents(child, folder) is not None:
-           filename_list.extend(folder_contents(child, folder))
-           return filename_list
-        else:
-            return None
+        new_child = folder_contents(child, folder)
+        if new_child is not None:
+           filename_list = new_child
+           
+           
 
     if filename_list is not None:
-        if fs.value != folder:
-            return None
-        else:
-            return filename_list
+        return filename_list
     
     return None
 
 
   
-print(folder_contents(create_filesystem_example(), "music"))
+print(folder_contents(create_filesystem_example(), "documents"))
 
 def main() -> None:
     """Skriver ut innehållet i några mappar och namnen på nivå 3."""
@@ -204,5 +202,27 @@ folder_contents(fs, "tmp") #[]
             return None
     
     return []
+
+
+    filename_list =  []
+    if fs.value == folder and fs.children:
+        for child in fs.children:
+            filename_list.append(child.value)
+        return filename_list 
+    
+    for child in fs.children:
+        if folder_contents(child, folder) is not None:
+           filename_list.extend(folder_contents(child, folder))
+           return filename_list
+        else:
+            return None
+
+    if filename_list is not None:
+        if fs.value != folder:
+            return None
+        else:
+            return filename_list
+    
+    return None
 
   """
