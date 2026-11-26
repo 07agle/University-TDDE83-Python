@@ -150,3 +150,4 @@ def summarize(logs: LogList) -> str:
         parts.append("")
         parts.append(format_counts(module_counts, "Per modul (module)"))
     return "\n".join(parts)
+

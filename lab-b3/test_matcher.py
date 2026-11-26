@@ -58,3 +58,4 @@ def test_filter_logs_wildcard() -> None:
         {"level": "ERROR", "user": None, "module": "power"},
         {"level": "INFO", "user": "omar"},
     ]
+

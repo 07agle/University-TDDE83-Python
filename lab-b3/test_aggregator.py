@@ -31,3 +31,4 @@ def test_count_by_module_key() -> None:
     result = count_by(logs, module_key)
     assert result == {"power": 1, "comms": 2}
 
+

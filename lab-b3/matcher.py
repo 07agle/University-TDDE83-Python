@@ -91,3 +91,4 @@ def filter_logs(logs: LogList, pattern: Pattern) -> LogList:
         if match_pattern(log_entry, pattern):
             filtered_list.append(log_entry)
     return filtered_list
+
