@@ -25,17 +25,29 @@ def create_filesystem_example() -> TreeNode:
         └── tmp
     """
 
-    return TreeNode("home", 
-                        [TreeNode("user", 
-                                [TreeNode("documents", 
-                                            [TreeNode("report.pdf", []), TreeNode("notes.txt", [])])
-                                ,TreeNode("code", 
-                                            [TreeNode("python", 
-                                                    [TreeNode("script.py",[])])
-                                        , TreeNode("README.md", [])])
-                                ,TreeNode("tmp", [])
-                                            ])])
-    
+    return TreeNode(
+        "home",
+        [
+            TreeNode(
+                "user",
+                [
+                    TreeNode(
+                        "documents",
+                        [TreeNode("report.pdf", []), TreeNode("notes.txt", [])],
+                    ),
+                    TreeNode(
+                        "code",
+                        [
+                            TreeNode("python", [TreeNode("script.py", [])]),
+                            TreeNode("README.md", []),
+                        ],
+                    ),
+                    TreeNode("tmp", []),
+                ],
+            )
+        ],
+    )
+
 
 def folder_contents(fs: TreeNode, folder: str) -> list[str | int] | None:
     """Returnerar namnen på det som ligger direkt i en mapp.
@@ -61,148 +73,66 @@ def folder_contents(fs: TreeNode, folder: str) -> list[str | int] | None:
         True
     """
 
-    filename_list =  []
-    if fs.value == folder and fs.children:
+    filename_list = None
+
+    if fs.value == folder:
+        filename_list = []
         for child in fs.children:
             filename_list.append(child.value)
-        return filename_list 
-    
+        return filename_list
+
     for child in fs.children:
-        if folder_contents(child, folder) is not None:
-           filename_list.extend(folder_contents(child, folder))
-           return filename_list
-        else:
-            return None
+        new_child = folder_contents(child, folder)
+        if new_child is not None:
+            filename_list = new_child
 
     if filename_list is not None:
-        if fs.value != folder:
-            return None
-        else:
-            return filename_list
-    
+        return filename_list
+
     return None
 
 
-  
-print(folder_contents(create_filesystem_example(), "music"))
-
 def main() -> None:
     """Skriver ut innehållet i några mappar och namnen på nivå 3."""
-    ...
+    """Filsystemträd skapat
+
+        Innehåll i mappar:
+        documents: report.pdf, notes.txt
+        code: python, README.md
+        tmp: (tom mapp)
+        music: finns INTE
+
+        På nivå 3: documents, code, tmp
+"""
+    filesystem = create_filesystem_example()
+    folder_list = ["documents", "code", "tmp", "music"]
+
+    output_string = f"Filsystemträd skapat \n \nInnehåll i mappar: \n"
+    for file in folder_list:
+        content = folder_contents(filesystem, file)
+        output_string += f"{file}: "
+        if content == []:
+            output_string += f"(tom mapp) \n"
+        elif content is None:
+            output_string += f"finns INTE \n"
+        else:
+            for i in range(len(content)):
+                if i < (len(content) - 1):
+                    output_string += f"{content[i]}, "
+                else:
+                    output_string += f"{content[i]}"
+            output_string += f"\n"
+
+    output_string += f"\n"
+    output_string += f"På nivå 3: "
+    level_values = values_at_level(filesystem, 3)
+    for i in range(len(level_values)):
+        if i < (len(level_values) - 1):
+            output_string += f"{level_values[i]}, "
+        else:
+            output_string += f"{level_values[i]} "
+    print(output_string)
 
 
 if __name__ == "__main__":
     main()
-
-
-fs = create_filesystem_example()
-folder_contents(fs, "tmp") #[]
-
-
-"""
-
-    filename_list =  []
-    if fs.value == folder:
-        if fs.children:
-            for child in fs.children:
-                filename_list.append(child.value)
-        else:
-            return ["saknas"]
-        return filename_list
-
-    if not fs.children:
-        return filename_list
-
-
-    for child in fs.children:
-        
-        child_list = folder_contents(child, folder)
-        
-        if child_list is not None:
-            filename_list.extend(child_list)
-
-    
-    if filename_list == ["saknas"] :
-        return []
-    if filename_list:
-        return filename_list
-    else:
-        return None
-
-
-        
-
-
-
-    filename_list =  []
-    if fs.value == folder and fs.children:
-        for child in fs.children:
-            filename_list.append(child.value)
-        return filename_list 
-    
-    for child in fs.children:
-        if folder_contents(child, folder):
-           filename_list.extend(folder_contents(child, folder))
-           return filename_list
-        else:
-            return []
-        
-    return None
-
-
-
-        filename_list =  []
-    if fs.value == folder:
-        if fs.children:
-            for child in fs.children:
-                filename_list.append(child.value)
-        else:
-            return ["saknas"]
-        return filename_list
-
-    if not fs.children:
-        return filename_list
-
-
-    for child in fs.children:
-        
-        child_list = folder_contents(child, folder)
-        
-        if child_list is not None:
-            filename_list.extend(child_list)
-
-        if filename_list is None:
-            return []
-        if filename_list == ["saknas"] :
-                return filename_list
-
-    
-    if filename_list == ["saknas"] :
-        return []
-    if filename_list:
-        return filename_list
-    else:
-        return None
-
-
-
-
-    filename_list =  []
-    if fs.value == folder:
-        if fs.children:
-            for child in fs.children:
-                filename_list.append(child.value)
-            return filename_list 
-        else:
-            return []
-    
-    for child in fs.children:
-        if folder_contents(child, folder):
-            filename_list.extend(folder_contents(child, folder))
-            return filename_list
-        else:
-            return None
-    
-    return []
-
-  """
