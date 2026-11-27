@@ -44,7 +44,7 @@ def values_at_level(tree: TreeNode, level: int) -> list[str | int]:
         return [tree.value]
 
     for child in tree.children:
-        tree_list.extend(values_at_level(child, level -1))
+        tree_list.extend(values_at_level(child, level - 1))
     return tree_list
 
 
@@ -82,3 +82,4 @@ def mirror(tree: TreeNode) -> TreeNode:
         reversed_children_list.append(mirror(child))
 
     return TreeNode(tree.value, reversed_children_list)
+

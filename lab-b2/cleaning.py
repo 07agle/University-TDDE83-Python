@@ -51,9 +51,22 @@ def remove_duplicates(records: StudentList) -> StudentList:
                 unique_list.append(record)
     return unique_list
 
-def _deepcopy_list(studen_list : StudentList) -> StudentList:
-    return deepcopy(studen_list)
+def _default_setter_epost(record : StudentRecord) -> DEFAULT_EMAIL | None:
+    """Kollar om epost finns annars returnerar DEFAULT_EMAIL"""
 
+    if not record.get("epost"):
+        return DEFAULT_EMAIL
+    if record.get("epost"):
+            return record.get("epost")
+    
+
+def _default_setter_program(record : StudentRecord) -> DEFAULT_PROGRAM | None:
+    """Kollar om program finns annars returnerar DEFAULT_PROGRAM"""
+    if not record.get("program"):
+        return DEFAULT_PROGRAM
+    if record.get("program"):
+        return record.get("program")
+    
 
 def fill_missing_fields(records: StudentList) -> StudentList:
     """Fyller i saknade eller tomma fält med default-värden.
@@ -75,13 +88,12 @@ def fill_missing_fields(records: StudentList) -> StudentList:
     >>> data[0]["epost"]
     ''
     """
-    new_student_list = _deepcopy_list(records)
+    new_student_list = deepcopy(records)
 
     for record in new_student_list:
-        if not record.get("epost"):
-            record["epost"] = DEFAULT_EMAIL
-        if not record.get("program"):
-            record["program"] = DEFAULT_PROGRAM
+        record["epost"] = _default_setter_epost(record)
+        record["program"] = _default_setter_program(record)
+        
 
     return new_student_list
 
@@ -135,8 +147,7 @@ def normalize_dates(records: StudentList) -> StudentList:
     new_student_list = deepcopy(records)
 
     for record in new_student_list:
-        if record.get("registreringsdatum"):
-            record["registreringsdatum"] = _parse_date(record.get("registreringsdatum"))
-    return new_student_list
+        record["registreringsdatum"] = _parse_date(record.get("registreringsdatum"))
 
+    return new_student_list
 
